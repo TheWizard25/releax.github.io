@@ -1,0 +1,116 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    color: blueviolet;
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 0px;
+}
+.head {
+    font-size: 35px;
+    -webkit-transition: all 0.2s ease-in;
+}
+.head:hover {
+    font-size: 35px;
+    -webkit-transform: scale(1.04,1.04);
+}
+.subhead {
+    font-weight: lighter;
+    font-size: 20px;
+}
+
+.topnav {
+    overflow: hidden;
+}
+
+.topnav a {
+    float: left;
+    display: block;
+    color: blueviolet;
+    text-align: center;
+    font-size: 12px;
+    padding: 16px 16px;
+    margin: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    -webkit-transition: all 0.2s ease-in;
+}
+
+.topnav a:hover {
+    background-color: blueviolet;
+    -webkit-transform: scale(1.05,1.05);
+    color: #E7E7E7;
+}
+
+.Download {
+    padding: 10px 20px;
+    color: blueviolet;
+    background-color: white;
+    border-radius: 3px;
+    border-width: 1px;
+    border-color: blueviolet;
+    display: block;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-transition: all 0.2s ease-in;
+}
+
+.Download:hover {
+    background-color: blueviolet;
+    -webkit-transform: scale(1.05,1.05);
+    color: #E7E7E7;
+}
+
+.Ss {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:  0;
+    max-width: 40%;
+    height: auto;
+    -webkit-transition: all 0.2s ease-in-out;
+}
+
+.Ss:hover {
+    -webkit-transform: scale(1.04,1.04);
+}
+
+.features {
+    width: 80%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.features h2 {
+    font-size: 30px;
+    -webkit-transition: all 0.2s ease-in-out;
+}
+
+.features h2:hover {
+    -webkit-transform: scale(1.05,1.05);
+}
+.card {
+    display: block;
+    float: left;
+    transition: 0.3s;
+    width: 30%;
+    height: 200px;
+    -webkit-transition: all 0.2s ease-in-out;
+}
+
+
+.card:hover {
+    -webkit-transform: scale(1.04,1.04);
+}
+
+.container {
+    padding: 2px 16px;
+}
