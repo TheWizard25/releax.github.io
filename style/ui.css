@@ -119,6 +119,7 @@ body {
 }
 
 .footer {
+    position: relative;
     color: rgb(65, 65, 65);
     text-align: center;
     left: 0;
@@ -138,4 +139,18 @@ body {
     width: 60%;
     margin-left: auto;
     margin-right: auto;
+}
+
+.box {
+    color: rgb(65, 65, 65);
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.script {
+    padding: 20px;
+    color: blueviolet;
+    font-weight: bolder;
 }

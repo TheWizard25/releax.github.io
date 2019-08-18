@@ -1,0 +1,137 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="./style/ui.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap" rel="stylesheet"> 
+    </head>
+    <body style="background-color:white;">
+        <div class="topnav">
+            <a href="index.html">Home</a>
+            <a href="handbook.html">Wiki</a>
+            <a href="#">Team</a>
+            <a href="https://github.com/releax">Github</a>
+        </div>
+        <div class="heading">
+            <div class="head"> releax Handbook
+                <div class="subhead">release 0.1a</div>
+            </div>
+        </div>
+        <div class="box">
+            <h3 style="text-align: center">Introduction</h3>
+            <p>
+                <h4>what is releax os ?</h4>
+                <p>
+                    releax os is a x86_64 optimized gnu/linux operating system. The primary focus of releax os is 'be innovative and personal'
+                    , means a operating system as per your need , every single part that you can or want to customize, you can .
+                    secondary focus is to be intersting will cool messages and responses ;-)
+                    
+                    <br><br>
+                    pkgs package manager is used in releax os which is home grown package manager which can build package from scratch and handle binary packages
+                    and a home grown init scheme 'Bootup' , a modern approach of sysvinit
+                    <br><br>                    
+                    releax os is a gnu/linux os means a lots of people behind it , who have contributed their software to the great linux community, and each software has
+                    its own license chosen by their authors
+
+                </p>
+                
+            </p>
+            <h3 style="text-align: center">Installation</h3>
+            <p>
+            <ul>
+                <li>Download the latest releax ISO image from <a href="https://releax.github.io/downloads/">Download</a>  and check md5sum for integerity
+                    <div class="script">
+                        $ md5sum releax-0.1a-x86_64.iso
+                    </div>
+                </li>
+                <li>Make Bootup USB or CD/DVD using <a href="https://rufus.ie/">rufus</a> or using linux 'dd' command
+                <div class="script">
+                    $ dd if=releax-0.1a-x86_64.iso of=/dev/USB bs=4M status=progress
+                </div>
+                </li>
+
+                <li>
+                    Boot up your live usb or CD/DVD
+                </li>
+
+                <li>
+                    create (if necessary) the required partitions (at least root partition)
+                    <div class="script">
+                        $ cfdisk /dev/sd?  # to start disk partition tool<br>
+                        $ mkfs.ext4 /dev/sd?      # to format the selected disk into ext4<br>
+                    </div>
+                </li>
+
+                <li>
+                    mount required partition(s) atleast roots
+                    <div class="script">
+                        $ mount -t devtmpfs none /dev <br>
+                        $ mount -t sysfs    none /sys <br>
+                        $ mount -t proc none /proc <br>
+                        <br>
+                        $ mount /dev/sd? /mnt # roots
+                    </div>
+                </li>
+
+                <li>
+                    goto /packages directory of live USB , it contains all the packages of live USB
+                    <div class="script">
+                        $ cd /packages
+                    </div>
+                    to install all packages into rootfs , do :
+                    <div class="script">
+                        $ for i in *.pkg ; do; ROOTS=/mnt addpkgs $i; done 
+                    </div>
+                    
+                    or for manually selected or single package at a time, in this case you need to check if required dependencies are installed or not
+                    otherwise your system might failed to boot or not worked properly
+                    <div class="script">
+                        $ ROOTS=/mnt addpkgs __PACKAGE_NAME__
+                    </div>
+                </li>
+
+                <li>
+                    chroot to your very fresh system by :
+                    <div class="script">
+                        $ chroot /mnt /bin/bash
+                    </div>
+                </li>
+
+                <li>
+                    Set the <b>root</b> user password.
+                    <div class="script">
+                        $ passwd
+                    </div>
+                </li>
+
+                <li>
+                    Edit <i style="color: green">/etc/fstab, /etc/bootup/init, /etc/bootup/restart, /etc/hostname </i> or any other thing you want 
+                </li>
+
+                <li>
+                    generate initramfs image for your system:
+                    <div class="script">
+                        $ mkinitramfs 
+                    </div>
+                </li>
+
+                <li>
+                    install grub bootloader into your system:
+                    <div class="script">
+                        $ mkdir -p /boot/EFI <br>
+                        $ mount -t /dev/EFI_PARTITON /boot/EFI <br>
+                        $ grub-install --target=x86_64-efi --bootloader-id="releax gnu/linux" --recheck <br>
+                        $ grub-mkconfig -o /boot/grub/grub.cfg <br>
+                    </div>
+
+                    for efi boot user <br>
+                    and for legacy :
+                    <div class="script">
+                        $ grub-install /dev/sda <br>
+                        $ grub-mkconfig -o /boot/grub/grub.cfg <br>
+                    </div>
+                </li>
+            </ul>
+            <h4>Horry ! if every thing is done correctly and god wants , then you can exit to chroot and reboot the system</h4>
+            </p>
+        </div>
+    </body>
+</html>
