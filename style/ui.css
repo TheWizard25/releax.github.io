@@ -119,12 +119,13 @@ body {
 }
 
 .footer {
-    position: relative;
+    position: sticky;
     color: rgb(65, 65, 65);
     text-align: center;
     left: 0;
     bottom: 0;
     width: 100%;
+    padding: 5px;
     background-color: white;
 }
 
