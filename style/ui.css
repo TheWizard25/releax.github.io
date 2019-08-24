@@ -211,3 +211,29 @@ body {
     from {opacity: 0;}
     to {opacity: 1;}
 }
+
+.team_card {
+    margin: 30px;
+    padding: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+    transition: 0.4s;
+    width: 300px;
+    -webkit-transition: all 0.2s ease-in-out;
+}
+
+.team_card:hover {
+    -webkit-transform: scale(1.04,1.04);
+}
+
+.name_head {
+    text-align: center;
+    padding: 10px;
+    font-size: 22px;
+}
+
+.name_sub {
+    font-size: 19px;
+    text-align: center;
+}
