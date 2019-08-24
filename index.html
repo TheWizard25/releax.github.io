@@ -15,7 +15,22 @@
                 <div class="subhead">a innovative linux distro</div>
             </div>
         </div>
-        <button class="Download" onclick="alert('Under Construction')">Download</button>
+        <button class="Download" id="download_btn">Download</button>
+
+        <div id="dwn_pop" class="download_popup">
+            <div class="download_content">
+                <span class="close" id="close_btn">&times;</span>
+                <p>releax 0.1a release is a unstable alpha release, and might have serious error and issues which might harm your system, current release is only avaliable to test
+                    under virtual environment such qemu and virtualbox, releax X.Y<b>a</b> means the alpha release which targets the developers and beta tester to test 
+                    and report the issues, if you are not a beta tester or no experience with any linux distro then you are not adviced to use it <br>
+                    <p style="text-align: center">please read the handbook to check how to test the current releax 0.1a release</p>
+                    <a style="text-decoration: none;" href="https://drive.google.com/open?id=1QTeC7iv7hPMjPBcfHj1DgkQId2dY3zpw" >
+                        <button class="Download">Download alpha release</button>
+                    </a>
+                </p>
+            </div>
+        </div>
+
         <img class="Ss" src="graphics/ss.png">
         
         <div class="features">
@@ -69,7 +84,22 @@
             <h1 style="text-align: center;">Dark And Light UI</h1>
             <img style="width: 80%;" src="graphics/mixed.png" class="image">
         </div>
+    
+    <script>
+        var popup = document.getElementById("dwn_pop");
+        var dwn_btn = document.getElementById("download_btn");
 
+        var span = document.getElementsByClassName("close")[0];
+
+        dwn_btn.onclick = function() {
+            popup.style.display = "block";
+        }
+
+        span.onclick = function() {
+            popup.style.display = "none";
+        }
+
+    </script>
     </body>
     <div class="footer">
         <p>Made with️ ❤️ in India</p>
