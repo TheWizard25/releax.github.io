@@ -35,28 +35,43 @@
                 
             </p>
             <h3 style="text-align: center">Installation</h3>
-            <p>
-            <ul>
-                <li>Download the latest releax ISO image from <a href="https://releax.github.io/downloads/">Download</a>  and check md5sum for integerity
-                    <div class="script">
-                        $ md5sum releax-0.1a-x86_64.iso
-                    </div>
-                </li>
-                <li>Make Bootup USB or CD/DVD using <a href="https://rufus.ie/">rufus</a> or using linux 'dd' command
+            Download the latest releax ISO image from <a href="https://releax.github.io/downloads/">Download</a>  and check md5sum for integerity
                 <div class="script">
-                    $ dd if=releax-0.1a-x86_64.iso of=/dev/USB bs=4M status=progress
+                    $ md5sum releax-0.1a-x86_64.iso
                 </div>
-                </li>
+            <h4 style="text-align: center">Setup QEMU</h4>
+            <p>
+                <ul>
+                    <li>download qemu </li>
+                    <div class="script">
+                        $ sudo apt install qemu # debian/ubuntu/...based distro<br>
+                        $ sudo pacman -S qmeu # archlinux<br>
+                        $ sudo dnf install qemu # fedora/redhat linux<br>
+                    </div>
 
-                <li>
-                    Boot up your live usb or CD/DVD
-                </li>
+                    <li>
+                        build a virtual disk image file in which you are going to perform the installation of releax gnu/linux,
+                        to generate the disk image use the command
+                        <div class="script">
+                            $ dd if=/dev/zero of=releax_disk.img count=10G status=progress
+                        </div>
 
+                        <i>*if disk size generation doesnt stop and cross the size of 10G then press <b>ctrl+z</b> to stop</i>
+                    </li><br>
+
+                    <li>
+                        its time to boot :-), use qemu to boot from iso using this command
+                        <div class="script">
+                            $ qemu-system-x86_64 releax.iso -hdb releax_disk.img -m 1024 -enable-kvm
+                        </div>
+                        <i>* -m 1024 : means the size of ram you want to allocate to virtual machine (decrease or increase as per your requirement)</i>
+                    </li>
+                    <br>
                 <li>
                     create (if necessary) the required partitions (at least root partition)
                     <div class="script">
-                        $ cfdisk /dev/sd?  # to start disk partition tool<br>
-                        $ mkfs.ext4 /dev/sd?      # to format the selected disk into ext4<br>
+                        $ cfdisk /dev/sdb  # to start disk partition tool<br>
+                        $ mkfs.ext4 /dev/sdb1      # to format the selected disk into ext4<br>
                     </div>
                 </li>
 
@@ -67,7 +82,7 @@
                         $ mount -t sysfs    none /sys <br>
                         $ mount -t proc none /proc <br>
                         <br>
-                        $ mount /dev/sd? /mnt # roots
+                        $ mount /dev/sdb1 /mnt # roots
                     </div>
                 </li>
 
