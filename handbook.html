@@ -51,7 +51,7 @@
                         build a virtual disk image file in which you are going to perform the installation of releax gnu/linux,
                         to generate the disk image use the command
                         <div class="script">
-                            <code>$ dd if=/dev/zero of=releax_disk.img count=10G status=progress</code>
+                            <code>dd if=/dev/zero of=hdd.img iflag=fullblock bs=1M count=10240 status=progress</code>
                         </div>
 
                         <i>*if disk size generation doesnt stop and cross the size of 10G then press <b>ctrl+z</b> to stop</i>
