@@ -152,9 +152,9 @@ body {
 }
 
 .script {
+    background-color: rgba(218, 216, 217, 0.23);
     padding: 20px;
-    color: blueviolet;
-    font-weight: bolder;
+    margin : 10px
 }
 
 .download_popup {
@@ -236,4 +236,13 @@ body {
 .name_sub {
     font-size: 19px;
     text-align: center;
+}
+
+pre{
+    background-color: rgba(218, 216, 217, 0.23);
+    padding: 20px;
+}
+code{
+    font-size : 14px;
+    
 }

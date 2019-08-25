@@ -36,24 +36,22 @@
             </p>
             <h3 style="text-align: center">Installation</h3>
             Download the latest releax ISO image from <a href="https://releax.github.io/downloads/">Download</a>  and check md5sum for integerity
-                <div class="script">
-                    $ md5sum releax-0.1a-x86_64.iso
-                </div>
+                <pre><code>$ md5sum releax-0.1a-x86_64.iso</code></pre>
             <h4 style="text-align: center">Setup QEMU</h4>
             <p>
                 <ul>
                     <li>download qemu </li>
                     <div class="script">
-                        $ sudo apt install qemu # debian/ubuntu/...based distro<br>
-                        $ sudo pacman -S qmeu # archlinux<br>
-                        $ sudo dnf install qemu # fedora/redhat linux<br>
+                        <code>$ sudo apt install qemu # debian/ubuntu/...based distro</code><br><br>
+                        <code>$ sudo pacman -S qmeu # archlinux</code><br><br>
+                        <code>$ sudo dnf install qemu # fedora/redhat linux</code>
                     </div>
 
                     <li>
                         build a virtual disk image file in which you are going to perform the installation of releax gnu/linux,
                         to generate the disk image use the command
                         <div class="script">
-                            $ dd if=/dev/zero of=releax_disk.img count=10G status=progress
+                            <code>$ dd if=/dev/zero of=releax_disk.img count=10G status=progress</code>
                         </div>
 
                         <i>*if disk size generation doesnt stop and cross the size of 10G then press <b>ctrl+z</b> to stop</i>
@@ -62,7 +60,7 @@
                     <li>
                         its time to boot :-), use qemu to boot from iso using this command
                         <div class="script">
-                            $ qemu-system-x86_64 releax.iso -hdb releax_disk.img -m 1024 -enable-kvm
+                            <code>$ qemu-system-x86_64 releax.iso -hdb releax_disk.img -m 1024 -enable-kvm</code>
                         </div>
                         <i>* -m 1024 : means the size of ram you want to allocate to virtual machine (decrease or increase as per your requirement)</i>
                     </li>
@@ -70,50 +68,50 @@
                 <li>
                     create (if necessary) the required partitions (at least root partition)
                     <div class="script">
-                        $ cfdisk /dev/sdb  # to start disk partition tool<br>
-                        $ mkfs.ext4 /dev/sdb1      # to format the selected disk into ext4<br>
+                        <code>$ cfdisk /dev/sdb  # to start disk partition tool</code><br>
+                        <code>$ mkfs.ext4 /dev/sdb1      # to format the selected disk into ext4</code><br>
                     </div>
                 </li>
 
                 <li>
                     mount required partition(s) atleast roots
                     <div class="script">
-                        $ mount -t devtmpfs none /dev <br>
-                        $ mount -t sysfs    none /sys <br>
-                        $ mount -t proc none /proc <br>
+                        <code>$ mount -t devtmpfs none /dev </code><br>
+                        <code> $ mount -t sysfs    none /sys </code><br>
+                        <code>$ mount -t proc none /proc </code><br>
                         <br>
-                        $ mount /dev/sdb1 /mnt # roots
+                        <code>$ mount /dev/sdb1 /mnt # roots</code>
                     </div>
                 </li>
 
                 <li>
                     goto /packages directory of live USB , it contains all the packages of live USB
                     <div class="script">
-                        $ cd /packages
+                        <code>$ cd /packages</code>
                     </div>
                     to install all packages into rootfs , do :
                     <div class="script">
-                        $ for i in *.pkg ; do; ROOTS=/mnt addpkgs $i; done 
+                        <code>$ for i in *.pkg ; do; ROOTS=/mnt addpkgs $i; done</code> 
                     </div>
                     
                     or for manually selected or single package at a time, in this case you need to check if required dependencies are installed or not
                     otherwise your system might failed to boot or not worked properly
                     <div class="script">
-                        $ ROOTS=/mnt addpkgs __PACKAGE_NAME__
+                        <code>$ ROOTS=/mnt addpkgs __PACKAGE_NAME__</code>
                     </div>
                 </li>
 
                 <li>
                     chroot to your very fresh system by :
                     <div class="script">
-                        $ chroot /mnt /bin/bash
+                        <code>$ chroot /mnt /bin/bash</code>
                     </div>
                 </li>
 
                 <li>
                     Set the <b>root</b> user password.
                     <div class="script">
-                        $ passwd
+                        <code>$ passwd</code>
                     </div>
                 </li>
 
@@ -124,24 +122,24 @@
                 <li>
                     generate initramfs image for your system:
                     <div class="script">
-                        $ mkinitramfs 
+                        <code>$ mkinitramfs </code>
                     </div>
                 </li>
 
                 <li>
                     install grub bootloader into your system:
                     <div class="script">
-                        $ mkdir -p /boot/EFI <br>
-                        $ mount -t /dev/EFI_PARTITON /boot/EFI <br>
-                        $ grub-install --target=x86_64-efi --bootloader-id="releax gnu/linux" --recheck <br>
-                        $ grub-mkconfig -o /boot/grub/grub.cfg <br>
+                        <code>$ mkdir -p /boot/EFI</code> <br><br>
+                        <code>$ mount -t /dev/EFI_PARTITON /boot/EFI</code> <br><br>
+                        <code>$ grub-install --target=x86_64-efi --bootloader-id="releax gnu/linux" --recheck</code> <br><br>
+                        <code>$ grub-mkconfig -o /boot/grub/grub.cfg </code>
                     </div>
 
                     for efi boot user <br>
                     and for legacy :
                     <div class="script">
-                        $ grub-install /dev/sda <br>
-                        $ grub-mkconfig -o /boot/grub/grub.cfg <br>
+                        <code>$ grub-install</code> /dev/sda</code> <br><br>
+                        <code>$ grub-mkconfig -o /boot/grub/grub.cfg</code> 
                     </div>
                 </li>
             </ul>
