@@ -8,11 +8,12 @@
             <a href="index.html">Home</a>
             <a href="handbook.html">Wiki</a>
             <a href="team.html">Team</a>
+            <a href="https://releax.flarum.cloud/">Community</a>
             <a href="https://github.com/releax">Github</a>
         </div>
         <div class="heading">
             <div class="head"> releax Handbook
-                <div class="subhead">release 0.1a</div>
+                <div class="subhead">release 0.1.a</div>
             </div>
         </div>
         <div class="box">
@@ -35,8 +36,8 @@
                 
             </p>
             <h3 style="text-align: center">Installation</h3>
-            Download the latest releax ISO image from <a href="https://releax.github.io/downloads/">Download</a>  and check md5sum for integerity
-                <pre><code>$ md5sum releax-0.1a-x86_64.iso</code></pre>
+            Download the latest releax ISO image and check sha512sum for integerity
+                <pre><code>$ sha512sum checksum</code></pre>
             <h4 style="text-align: center">Setup QEMU</h4>
             <p>
                 <ul>
@@ -79,6 +80,7 @@
                         <code>$ mount -t devtmpfs none /dev </code><br>
                         <code> $ mount -t sysfs    none /sys </code><br>
                         <code>$ mount -t proc none /proc </code><br>
+                        <code>$ mount -t tmpfs none /tmp </code><br>
                         <br>
                         <code>$ mount /dev/sdb1 /mnt # roots</code>
                     </div>
@@ -124,27 +126,43 @@
                     <div class="script">
                         <code>$ mkinitramfs </code>
                     </div>
+                    <i>* mkinitramfs is currently broken, read the release note to build initramfs</i>
                 </li>
 
                 <li>
                     install grub bootloader into your system:
                     <div class="script">
-                        <code>$ mkdir -p /boot/EFI</code> <br><br>
-                        <code>$ mount -t /dev/EFI_PARTITON /boot/EFI</code> <br><br>
-                        <code>$ grub-install --target=x86_64-efi --bootloader-id="releax gnu/linux" --recheck</code> <br><br>
+                        <code>$ grub-install /dev/sdb --recheck</code> <br><br>
                         <code>$ grub-mkconfig -o /boot/grub/grub.cfg </code>
                     </div>
-
-                    for efi boot user <br>
-                    and for legacy :
+                    <i>** grub-mkconfig is currently broken , so use </i>
                     <div class="script">
-                        <code>$ grub-install</code> /dev/sda</code> <br><br>
-                        <code>$ grub-mkconfig -o /boot/grub/grub.cfg</code> 
+                        <code>$ vi /boot/grub/grub.cfg</code><br>
+                    </div> 
+                    <i>press 'i' and move the cursor under commented linux headers and type</i>
+                    <div class="script">
+                        <code>
+                            insmod ext4<br>
+                            menuentry "releax gnu/linux" { <br>
+                                linux /boot/vmlinuz root=/dev/sda1 <br>
+                                initrd /boot/initrd <br>
+                            }
+                        </code>
                     </div>
+                    <i>press 'ESC' then 'x' then 'ENTER' to save</i>
                 </li>
             </ul>
             <h4>Horry ! if every thing is done correctly and god wants , then you can exit to chroot and reboot the system</h4>
             </p>
+
+            <i>your system is install in hdd.img<br>
+            to boot into the installed system </i>
+            <div class="script">
+                <code>
+                    $ qemu-system-x86_64 -hda hdd.img -enable-kvm -m 1024
+                </code>
+            </div>
+
         </div>
 
     </body>
